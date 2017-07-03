@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Build env"
+env
+
+# call base assemble script
+$STI_SCRIPTS_PATH/assemble
