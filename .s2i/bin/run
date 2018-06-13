@@ -3,7 +3,9 @@
 set -e
 
 echo "---> Running data migration..."
+pushd /opt/app-root/src
 dotnet ef database update
+popd
 
 # Delegate to running the s2i builder's
 # run script.
