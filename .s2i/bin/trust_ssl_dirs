@@ -28,6 +28,8 @@ if [ -n "$DOTNET_SSL_DIRS" ]; then
   # Create/replace certificate folder.
   rm -rf "$DOTNET_SSL_CERT_DIR"
   mkdir "$DOTNET_SSL_CERT_DIR"
+  echo "cert folder contains"
+  ls -lah "$DOTNET_SSL_CERT_DIR"
 
   # Populate it with certificates.
   CERT_ID=0
@@ -39,7 +41,7 @@ if [ -n "$DOTNET_SSL_DIRS" ]; then
       CERTFILES=(`find -L "$SSL_DIR" -maxdepth 1 -type f -exec realpath {} \;`)
       for CERT_FILE in ${CERTFILES[@]}
       do
-        echo "> adding $ CERT_FILE"
+        echo "> adding $CERT_FILE"
         ln -s "$CERT_FILE" "$DOTNET_SSL_CERT_DIR/_s2i$CERT_ID"
         CERT_ID=$((CERT_ID + 1))
       done
