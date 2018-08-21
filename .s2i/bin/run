@@ -5,4 +5,4 @@ source /opt/app-root/src/.s2i/bin/trust_ssl_dirs
 source /opt/app-root/src/.s2i/bin/trust_ssl_dirs
 
 # call base run script
-$STI_SCRIPTS_PATH/assemble
+$STI_SCRIPTS_PATH/run
