@@ -44,6 +44,7 @@ namespace app
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseHttpMetrics();
 
             app.UseAuthorization();
 
