@@ -21,6 +21,10 @@ namespace app
         public static void Main(string[] args)
         {
             Console.Write("IsATty : " + IsATty(new SafeFileHandle((IntPtr)1, ownsHandle: false)));
+            Console.WriteLine("IsOutputRedirected: " + Console.IsOutputRedirected);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Hello world!");
 
             CreateHostBuilder(args).Build().Run();
         }
