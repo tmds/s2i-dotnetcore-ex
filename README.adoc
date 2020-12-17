@@ -1,3 +1,5 @@
+a change
+
 = .NET Core Sample App for OpenShift
 
 This repository contains a simple MVC .NET Core application that can be deployed on OpenShift.
