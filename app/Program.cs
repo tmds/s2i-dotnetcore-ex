@@ -20,7 +20,7 @@ namespace app
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    config.AddJsonFile("/deployments/config/application.properties", optional: true);
+                    config.AddJsonFile("/deployments/config/application.properties", optional: false);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
