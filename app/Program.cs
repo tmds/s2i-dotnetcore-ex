@@ -18,6 +18,10 @@ namespace app
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddJsonFile("/deployments/config/application.properties", optional: true);
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
