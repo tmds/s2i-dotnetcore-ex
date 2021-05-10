@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Runtime.InteropServices;
 
 namespace app
 {
@@ -20,11 +21,28 @@ namespace app
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    config.AddJsonFile("/deployments/config/application.properties", optional: false, reloadOnChange: true);
+                    config.AddJsonFile(Resolve("/deployments/config/application.properties"), optional: false, reloadOnChange: true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        static string Resolve(string path)
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                IntPtr resolved = realpath(path);
+                if (resolved != IntPtr.Zero)
+                {
+                    path = Marshal.PtrToStringAnsi(resolved);
+                    Marshal.FreeHGlobal(resolved);
+                }
+            }
+            return path;
+        }
+
+        [DllImport("libc")]
+        static extern IntPtr realpath(string path, IntPtr resolved_path = default);
     }
 }
