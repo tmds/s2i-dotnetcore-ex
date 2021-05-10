@@ -14,6 +14,7 @@ namespace app
     {
         public static void Main(string[] args)
         {
+            System.Console.WriteLine("Real path is " + Realpath("/deployments/config/application.properties"));
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -21,14 +22,14 @@ namespace app
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    config.AddJsonFile(Resolve("/deployments/config/application.properties"), optional: false, reloadOnChange: true);
+                    config.AddJsonFile(Realpath("/deployments/config/application.properties"), optional: false, reloadOnChange: true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
 
-        static string Resolve(string path)
+        static string Realpath(string path)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
